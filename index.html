@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация и API Запрос</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Регистрация</h1>
+        <form id="registrationForm">
+            <input type="text" id="name" name="name" placeholder="Имя" required>
+            <input type="text" id="login" name="login" placeholder="Логин" required>
+            <input type="password" id="password" name="password" placeholder="Пароль" required>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <div class="message" id="responseMessage"></div>
+    </div>
+    <div id="response">Loading...</div>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Останавливаем стандартное поведение формы
+
+            // Получаем значения полей формы
+            const name = document.getElementById('name').value;
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+
+            // Создаем объект данных для отправки
+            const requestData = {
+                name: name,
+                login: login,
+                password: password
+            };
+
+            // Выполняем POST-запрос на сервер
+            fetch('http://95.163.222.106/api/Auth/Registration', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Обрабатываем ответ от сервера
+                document.getElementById('responseMessage').textContent = `Ответ сервера: ${data.data || 'Регистрация прошла успешно!'}`;
+                console.log(data);
+                console.log(data.data);
+            })
+            .catch(error => {
+                console.error('Ошибка при регистрации:', error);
+                document.getElementById('responseMessage').textContent = 'Ошибка при регистрации, попробуйте снова.';
+            });
+        });
+    </script>
+    <script>
+      // Выполняем запрос к API
+      fetch('http://95.163.222.106/api/Account/hello')
+          .then(response => response.json()) // Преобразуем ответ в JSON
+          .then(data => {
+              // Извлекаем значение поля "data" и выводим на страницу
+              document.getElementById('response').textContent = data.data;
+              console.log(data);
+          })
+          .catch(error => {
+              console.error('Ошибка при запросе:', error);
+              document.getElementById('response').textContent = 'Не удалось загрузить данные';
+          });
+  </script>
+</body>
+</html>
