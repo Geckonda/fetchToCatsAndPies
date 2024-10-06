@@ -57,7 +57,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Регистрация</h1>
+        <h1>Регистрация (httpS)</h1>
         <form id="registrationForm">
             <input type="text" id="name" name="name" placeholder="Имя" required>
             <input type="text" id="login" name="login" placeholder="Логин" required>
@@ -84,7 +84,7 @@
             };
 
             // Выполняем POST-запрос на сервер
-            fetch('http://95.163.222.106/api/Auth/Registration', {
+            fetch('https://catsandpies.ru/api/Auth/Registration', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -106,7 +106,7 @@
     </script>
     <script>
       // Выполняем запрос к API
-      fetch('http://95.163.222.106/api/Account/hello')
+      fetch('https://catsandpies.ru/api/Account/hello')
           .then(response => response.json()) // Преобразуем ответ в JSON
           .then(data => {
               // Извлекаем значение поля "data" и выводим на страницу
