@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+    <style>
+      .data-field {
+            margin-bottom: 15px;
+        }
+        .label {
+            font-weight: bold;
+        }
+        .value {
+            margin-left: 10px;
+        }
+        #questionnaire-container{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Это твой профиль <span id="user-name"></span></h2>
+
+    <div id="questionnaire-container">
+      <div class="data-field">
+         <span class="label">Name:</span> 
+         <span class="value" id="name"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Birthday:</span> 
+         <span class="value" id="birthday"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Hobby:</span> 
+         <span class="value" id="hobby"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Favorite Season:</span> 
+         <span class="value" id="season"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Favorite Flower:</span> 
+         <span class="value" id="flower"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Favorite Dish:</span> 
+         <span class="value" id="dish"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Chill Time:</span> 
+         <span class="value" id="chillTime"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Favorite Film:</span> 
+         <span class="value" id="film"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Favorite Singer:</span> 
+         <span class="value" id="singer"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Favorite Color:</span> 
+         <span class="value" id="color"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Positive Traits:</span> 
+         <span class="value" id="positiveTraits"></span>
+     </div>
+ 
+     <div class="data-field">
+         <span class="label">Dream:</span> 
+         <span class="value" id="dream"></span>
+     </div>
+    </div>
+
+    <form id="dataForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" required><br><br>
+
+        <label for="hobby">Hobby:</label>
+        <input type="text" id="hobby" name="hobby"><br><br>
+
+        <label for="season">Favorite Season:</label>
+        <input type="text" id="season" name="season"><br><br>
+
+        <label for="flower">Favorite Flower:</label>
+        <input type="text" id="flower" name="flower"><br><br>
+
+        <label for="dish">Favorite Dish:</label>
+        <input type="text" id="dish" name="dish"><br><br>
+
+        <label for="chillTime">Chill Time:</label>
+        <input type="text" id="chillTime" name="chillTime"><br><br>
+
+        <label for="film">Favorite Film:</label>
+        <input type="text" id="film" name="film"><br><br>
+
+        <label for="singer">Favorite Singer:</label>
+        <input type="text" id="singer" name="singer"><br><br>
+
+        <label for="color">Favorite Color:</label>
+        <input type="text" id="color" name="color"><br><br>
+
+        <label for="positiveTraits">Positive Traits:</label>
+        <input type="text" id="positiveTraits" name="positiveTraits"><br><br>
+
+        <label for="dream">Dream:</label>
+        <input type="text" id="dream" name="dream"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      const usernameSpan = document.getElementById('user-name');
+
+      function getCookie(name) {
+         const value = `; ${document.cookie}`;
+         const parts = value.split(`; ${name}=`);
+         if (parts.length === 2) return parts.pop().split(';').shift();
+      }
+
+      fetch('https://catsandpies.ru/api/Account/profile', {
+         method: 'Get',
+         headers:{
+               'Authorization': `Bearer ${getCookie('authToken')}`,
+               'Content-Type': 'application/json'
+         }
+      }).then(response => response.json())
+      .then(data => {
+         usernameSpan.textContent = data;
+      })
+      .catch(error => {
+         console.error('Ошибка получения имени:', error);
+      });
+
+      let userHasQuestionnaire = false;
+      fetch('https://catsandpies.ru/api/Questionnaire/GetMyQuestionnaire', {
+         method: 'Get',
+         headers:{
+               'Authorization': `Bearer ${getCookie('authToken')}`,
+               'Content-Type': 'application/json'
+         }
+         }).then(response => response.json())
+         .then(data => {
+            if(data.data != null)
+            {
+               document.getElementById('questionnaire-container').style.display = "block";
+               displayData(data); 
+            }
+         })
+         .catch(error => {
+            console.error('Ошибка получения анкеты:', error);
+         });
+
+
+         function displayData(data) {
+            document.getElementById('name').textContent = data.name;
+            document.getElementById('birthday').textContent = data.birthday;
+            document.getElementById('hobby').textContent = data.hobby;
+            document.getElementById('season').textContent = data.season;
+            document.getElementById('flower').textContent = data.flower;
+            document.getElementById('dish').textContent = data.dish;
+            document.getElementById('chillTime').textContent = data.chillTime;
+            document.getElementById('film').textContent = data.film;
+            document.getElementById('singer').textContent = data.singer;
+            document.getElementById('color').textContent = data.color;
+            document.getElementById('positiveTraits').textContent = data.positiveTraits;
+            document.getElementById('dream').textContent = data.dream;
+        }
+
+
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+            // Собираем данные формы
+            const formData = {
+                name: document.getElementById('name').value,
+                birthday: document.getElementById('birthday').value,
+                hobby: document.getElementById('hobby').value,
+                season: document.getElementById('season').value,
+                flower: document.getElementById('flower').value,
+                dish: document.getElementById('dish').value,
+                chillTime: document.getElementById('chillTime').value,
+                film: document.getElementById('film').value,
+                singer: document.getElementById('singer').value,
+                color: document.getElementById('color').value,
+                positiveTraits: document.getElementById('positiveTraits').value,
+                dream: document.getElementById('dream').value
+            };
+
+            // Отправка данных на сервер
+            fetch('https://catsandpies.ru/api/Questionnaire', {
+                method: 'POST',
+                headers: {
+                     'Authorization': `Bearer ${getCookie('authToken')}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData) // Преобразуем данные в формат JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -94,9 +94,25 @@
             .then(response => response.json())
             .then(data => {
                 // Обрабатываем ответ от сервера
-                document.getElementById('responseMessage').textContent = `Ответ сервера: ${data.data || 'Регистрация прошла успешно!'}`;
+                document.getElementById('responseMessage').textContent = `Ответ сервера: ${data.data.messageForUser || 'Регистрация прошла успешно!'}`;
                 console.log(data);
                 console.log(data.data);
+
+                // Получаем токен и срок действия
+                const token = data.token.token;
+                const expiresIn = data.token.expiresIn; // Время окончания действия токена (UTC)
+
+                // Преобразуем expiresIn в дату
+                const expirationDate = new Date(expiresIn);
+
+                // Рассчитываем время жизни куки в секундах
+                const maxAge = Math.floor((expirationDate - new Date()) / 1000); // в секундах
+
+                // Сохраняем токен в куки с учетом времени жизни
+                document.cookie = `authToken=${token}; path=/; max-age=${maxAge}; secure`;
+
+                console.log('Токен успешно сохранен в куки');
+                window.location.href = '/profile.html';
             })
             .catch(error => {
                 console.error('Ошибка при регистрации:', error);
