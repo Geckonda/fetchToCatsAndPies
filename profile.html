@@ -85,41 +85,41 @@
     </div>
 
     <form id="dataForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
+        <label for="fname">Name:</label>
+        <input type="text" id="fname" name="name" required><br><br>
 
-        <label for="birthday">Birthday:</label>
-        <input type="date" id="birthday" name="birthday" required><br><br>
+        <label for="fbirthday">Birthday:</label>
+        <input type="date" id="fbirthday" name="birthday" required><br><br>
 
-        <label for="hobby">Hobby:</label>
-        <input type="text" id="hobby" name="hobby"><br><br>
+        <label for="fhobby">Hobby:</label>
+        <input type="text" id="fhobby" name="hobby"><br><br>
 
-        <label for="season">Favorite Season:</label>
-        <input type="text" id="season" name="season"><br><br>
+        <label for="fseason">Favorite Season:</label>
+        <input type="text" id="fseason" name="season"><br><br>
 
-        <label for="flower">Favorite Flower:</label>
-        <input type="text" id="flower" name="flower"><br><br>
+        <label for="fflower">Favorite Flower:</label>
+        <input type="text" id="fflower" name="flower"><br><br>
 
-        <label for="dish">Favorite Dish:</label>
-        <input type="text" id="dish" name="dish"><br><br>
+        <label for="fdish">Favorite Dish:</label>
+        <input type="text" id="fdish" name="dish"><br><br>
 
-        <label for="chillTime">Chill Time:</label>
-        <input type="text" id="chillTime" name="chillTime"><br><br>
+        <label for="fchillTime">Chill Time:</label>
+        <input type="text" id="fchillTime" name="chillTime"><br><br>
 
-        <label for="film">Favorite Film:</label>
-        <input type="text" id="film" name="film"><br><br>
+        <label for="ffilm">Favorite Film:</label>
+        <input type="text" id="ffilm" name="film"><br><br>
 
-        <label for="singer">Favorite Singer:</label>
-        <input type="text" id="singer" name="singer"><br><br>
+        <label for="fsinger">Favorite Singer:</label>
+        <input type="text" id="fsinger" name="singer"><br><br>
 
-        <label for="color">Favorite Color:</label>
-        <input type="text" id="color" name="color"><br><br>
+        <label for="fcolor">Favorite Color:</label>
+        <input type="text" id="fcolor" name="color"><br><br>
 
-        <label for="positiveTraits">Positive Traits:</label>
-        <input type="text" id="positiveTraits" name="positiveTraits"><br><br>
+        <label for="fpositiveTraits">Positive Traits:</label>
+        <input type="text" id="fpositiveTraits" name="positiveTraits"><br><br>
 
-        <label for="dream">Dream:</label>
-        <input type="text" id="dream" name="dream"><br><br>
+        <label for="fdream">Dream:</label>
+        <input type="text" id="fdream" name="dream"><br><br>
 
         <button type="submit">Submit</button>
     </form>
@@ -188,18 +188,18 @@
 
             // Собираем данные формы
             const formData = {
-                name: document.getElementById('name').value,
-                birthday: document.getElementById('birthday').value,
-                hobby: document.getElementById('hobby').value,
-                season: document.getElementById('season').value,
-                flower: document.getElementById('flower').value,
-                dish: document.getElementById('dish').value,
-                chillTime: document.getElementById('chillTime').value,
-                film: document.getElementById('film').value,
-                singer: document.getElementById('singer').value,
-                color: document.getElementById('color').value,
-                positiveTraits: document.getElementById('positiveTraits').value,
-                dream: document.getElementById('dream').value
+                name: document.getElementById('fname').value,
+                birthday: document.getElementById('fbirthday').value,
+                hobby: document.getElementById('fhobby').value,
+                season: document.getElementById('fseason').value,
+                flower: document.getElementById('fflower').value,
+                dish: document.getElementById('fdish').value,
+                chillTime: document.getElementById('fchillTime').value,
+                film: document.getElementById('ffilm').value,
+                singer: document.getElementById('fsinger').value,
+                color: document.getElementById('fcolor').value,
+                positiveTraits: document.getElementById('fpositiveTraits').value,
+                dream: document.getElementById('fdream').value
             };
 
             // Отправка данных на сервер
