@@ -95,8 +95,8 @@
                 console.log(data.data);
 
                 // Получаем токен и срок действия
-                const token = data.token.token;
-                const expiresIn = data.token.expiresIn; // Время окончания действия токена (UTC)
+                const token = data.data.token.token;
+                const expiresIn = data.data.token.expiresIn; // Время окончания действия токена (UTC)
 
                 // Преобразуем expiresIn в дату
                 const expirationDate = new Date(expiresIn);
