@@ -4,6 +4,16 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
+   <style>
+      .card
+      {
+         padding: 5px;
+         margin: 5px;
+         border-radius: 10px;
+         border: 1px solid black
+      }
+
+   </style>
 </head>
 <body>
    <div id="catalog-box">
@@ -42,6 +52,8 @@
          card.appendChild(cardTitle);
          card.appendChild(cardPrice);
          card.appendChild(cardText);
+
+         card.classList.add("card");
 
          box.appendChild(card);
       }
