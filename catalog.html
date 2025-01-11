@@ -21,13 +21,29 @@
          .then(response => response.json())
          .then(data => {
             console.log(data);
+            for (let index = 0; index < data.data.length; index++) {
+               CreateCard(data.data[index])
+            }
          })
          .catch(error => {
                console.error('Ошибка:', error);
             });
-      function CreateCard()
+      function CreateCard(data)
       {
+         const card = document.createElement("div")
+         const cardTitle = document.createElement("h4");
+         const cardPrice = document.createElement("h5");
+         const cardText = document.createElement("p");
 
+         cardTitle.textContent = data.name;
+         cardPrice.textContent = data.price;
+         cardText.textContent = data.description;
+
+         card.appendChild(cardTitle);
+         card.appendChild(cardPrice);
+         card.appendChild(cardText);
+
+         box.appendChild(card);
       }
    </script>
 </body>
